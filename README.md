@@ -13,7 +13,7 @@ ZBrushのFibermeshから"Export Curve"した.objをAMD TressFXの.tfxへ変換�
 
 6. ![](http://i.imgur.com/0RKzNRN.jpg) 3でエクスポートした髪束objを当ソフトへドロップ。.tfxに変換される
 
-7. 5,6のobj２つを適当にバイナリ形式(objb, tfxb)に変換。詳しくはTressFXのSDKを見てちょ
+7. 5のobj、6のtfx、２ファイルを適当にバイナリ形式(objb, tfxb)に変換。詳しくはTressFXのSDKを見てちょ
 
 8. 最後に適当なファイルにリネームしてテスト。ruby.tfxbが初期表示されるファイル。
 
