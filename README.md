@@ -3,18 +3,28 @@ ZBrushのFibermeshから"Export Curve"した.objをAMD TressFXの.tfxへ変換�
 
 1. ZBrushのFibermeshで髪束を作る。４千ポリくらいだと上位GPUでギリギリ動くくらい？
 
-2. ![](http://i.imgur.com/L1uy0Fd.jpg) スケールを100くらいに設定
+2. スケールを100くらいに設定
 
-3. ![](http://i.imgur.com/Lq5ri4B.jpg) Fibermeshで作った髪束をSubtoolパネルで選択。Fibermeshパネルから"Export Curve"
+![](http://i.imgur.com/L1uy0Fd.jpg)
 
-4. ![](http://i.imgur.com/JvJApX6.jpg) 頭部（髪以外）をSubtoolパネルで選択。objエクスポート。
+3. Fibermeshで作った髪束をSubtoolパネルで選択。Fibermeshパネルから"Export Curve"
+
+![](http://i.imgur.com/Lq5ri4B.jpg)
+
+4. 頭部（髪以外）をSubtoolパネルで選択。objエクスポート。
+
+![](http://i.imgur.com/JvJApX6.jpg)
 
 5. 適当なソフトで頭部objを開いてマテリアルを作って適応。TressFXデモは１つのマテリアルしかサポートしていないので注意。
 
-6. ![](http://i.imgur.com/0RKzNRN.jpg) 3でエクスポートした髪束objを当ソフトへドロップ。.tfxに変換される
+6. 3でエクスポートした髪束objを当ソフトへドロップ。.tfxに変換される
+
+![](http://i.imgur.com/0RKzNRN.jpg)
 
 7. 5のobj、6のtfx、２ファイルを適当にバイナリ形式(objb, tfxb)に変換。詳しくはTressFXのSDKを見てちょ
 
 8. 最後に適当なファイルにリネームしてテスト。ruby.tfxbが初期表示されるファイル。
 
-[AMD TressFX](http://developer.amd.com/tools-and-sdks/graphics-development/amd-radeon-sdk/ "")」
+関連リンク :
+
+[AMD TressFX](http://developer.amd.com/tools-and-sdks/graphics-development/amd-radeon-sdk/ "")
