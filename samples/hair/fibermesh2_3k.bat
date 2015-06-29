@@ -1,0 +1,2 @@
+assetconverter fibermesh2_hair3k_curves.tfx ruby.tfxb
+pause

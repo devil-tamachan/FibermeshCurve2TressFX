@@ -1,6 +1,11 @@
 # FibermeshCurve2TressFX
 ZBrushのFibermeshから"Export Curve"した.objをAMD TressFXの.tfxへ変換するプログラム
 
+・変換サンプル。発生条件が不明だけど一部髪が動かない場合がある（右下の髪）
+![](http://i.imgur.com/O4lRaGD.jpg)
+
+・髪の太さをもっと太くしたい場合、TressFX11/main.cppの1131行付近@OnGUIEventのpHairParams->radiusに代入すると変えられる。
+
 1. ZBrushのFibermeshで髪束を作る。４千ポリくらいだと上位GPUでギリギリ動くくらい？
 
 2. スケールを100くらいに設定 ![](http://i.imgur.com/L1uy0Fd.jpg)
