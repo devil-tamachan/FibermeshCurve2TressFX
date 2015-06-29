@@ -1,0 +1,57 @@
+%token_type {PassData}
+
+%type intval {__int64}
+
+%type dblval {double}
+
+%type strval {CString*}
+%destructor strval {if($$!=NULL)delete $$;}
+
+%type strval2 {CString*}
+%destructor strval2 {if($$!=NULL)delete $$;}
+
+%type vexpr {vector3df*}
+%destructor vexpr {if($$)delete $$;}
+
+%type vexprarr {CAtlArray<vector3df*>*}
+%destructor vexprarr {if($$)delete $$;}
+
+%type intarr {CAtlArray<int>*}
+%destructor intarr {if($$)delete $$;}
+
+%extra_argument { CMYWriter *pWriter }
+
+%include {
+//#include "stdafx.h"
+#define assert ATLASSERT
+}
+
+%syntax_error {
+  ATLTRACE(_T("Syntax Error!\n"));
+}
+
+%start_symbol program
+
+program ::= expr.
+
+expr ::= expr expr2.
+expr ::= .
+
+expr2 ::= vexprarr(B) gexpr lexpr. { pWriter->AddStrand(B); }
+vexprarr(A) ::= vexprarr(B) vexpr(C).  { A = B; A->Add(C); B=NULL; C=NULL; }
+vexprarr(A) ::= vexpr(B). { A = new CAtlArray<vector3df*>(); A->Add(B); B=NULL; }
+
+intval(A) ::= INTVAL(B). { A = B.i; }
+
+dblval(A) ::= DBLVAL(B). { A = B.dbl; }
+dblval(A) ::= INTVAL(B). { A = (double)(B.i); }
+
+strval(A) ::= STRVAL(B). { A = B.str; B.str = NULL; }
+
+vexpr(A) ::= TAG_v dblval(B) dblval(C) dblval(D). { A = new vector3df(B, C, D); }
+
+gexpr ::= TAG_g strval.
+lexpr ::= TAG_l intarr.
+
+intarr(A) ::= intarr(B) intval(C). {A=B; A->Add(C);}
+intarr(A) ::= . {A = new CAtlArray<int>();}

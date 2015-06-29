@@ -1,0 +1,169 @@
+State 0:
+          program ::= * expr
+          expr ::= * expr expr2
+      (2) expr ::= *
+
+                       program accept
+                          expr shift  1
+                     {default} reduce 2
+
+State 1:
+      (0) program ::= expr *
+          expr ::= expr * expr2
+          expr2 ::= * vexprarr gexpr lexpr
+          vexprarr ::= * vexprarr vexpr
+          vexprarr ::= * vexpr
+          vexpr ::= * TAG_v dblval dblval dblval
+
+                             $ reduce 0
+                         TAG_v shift  5
+                         vexpr shift  10
+                      vexprarr shift  2
+                         expr2 shift  20
+
+State 2:
+          expr2 ::= vexprarr * gexpr lexpr
+          vexprarr ::= vexprarr * vexpr
+          vexpr ::= * TAG_v dblval dblval dblval
+          gexpr ::= * TAG_g strval
+
+                         TAG_v shift  5
+                         TAG_g shift  6
+                         vexpr shift  16
+                         gexpr shift  8
+
+State 3:
+          dblval ::= * DBLVAL
+          dblval ::= * INTVAL
+          vexpr ::= TAG_v dblval dblval * dblval
+
+                        INTVAL shift  14
+                        DBLVAL shift  15
+                        dblval shift  13
+
+State 4:
+          dblval ::= * DBLVAL
+          dblval ::= * INTVAL
+          vexpr ::= TAG_v dblval * dblval dblval
+
+                        INTVAL shift  14
+                        DBLVAL shift  15
+                        dblval shift  3
+
+State 5:
+          dblval ::= * DBLVAL
+          dblval ::= * INTVAL
+          vexpr ::= TAG_v * dblval dblval dblval
+
+                        INTVAL shift  14
+                        DBLVAL shift  15
+                        dblval shift  4
+
+State 6:
+          strval ::= * STRVAL
+          gexpr ::= TAG_g * strval
+
+                        STRVAL shift  12
+                        strval shift  11
+
+State 7:
+          intval ::= * INTVAL
+     (12) lexpr ::= TAG_l intarr *
+          intarr ::= intarr * intval
+
+                        INTVAL shift  18
+                        intval shift  17
+                     {default} reduce 12
+
+State 8:
+          expr2 ::= vexprarr gexpr * lexpr
+          lexpr ::= * TAG_l intarr
+
+                         TAG_l shift  9
+                         lexpr shift  19
+
+State 9:
+          lexpr ::= TAG_l * intarr
+          intarr ::= * intarr intval
+     (14) intarr ::= *
+
+                        intarr shift  7
+                     {default} reduce 14
+
+State 10:
+      (5) vexprarr ::= vexpr *
+
+                     {default} reduce 5
+
+State 11:
+     (11) gexpr ::= TAG_g strval *
+
+                     {default} reduce 11
+
+State 12:
+      (9) strval ::= STRVAL *
+
+                     {default} reduce 9
+
+State 13:
+     (10) vexpr ::= TAG_v dblval dblval dblval *
+
+                     {default} reduce 10
+
+State 14:
+      (8) dblval ::= INTVAL *
+
+                     {default} reduce 8
+
+State 15:
+      (7) dblval ::= DBLVAL *
+
+                     {default} reduce 7
+
+State 16:
+      (4) vexprarr ::= vexprarr vexpr *
+
+                     {default} reduce 4
+
+State 17:
+     (13) intarr ::= intarr intval *
+
+                     {default} reduce 13
+
+State 18:
+      (6) intval ::= INTVAL *
+
+                     {default} reduce 6
+
+State 19:
+      (3) expr2 ::= vexprarr gexpr lexpr *
+
+                     {default} reduce 3
+
+State 20:
+      (1) expr ::= expr expr2 *
+
+                     {default} reduce 1
+
+----------------------------------------------------
+Symbols:
+    0: $:
+    1: INTVAL
+    2: DBLVAL
+    3: STRVAL
+    4: TAG_v
+    5: TAG_g
+    6: TAG_l
+    7: error:
+    8: intval: INTVAL
+    9: dblval: INTVAL DBLVAL
+   10: strval: STRVAL
+   11: strval2:
+   12: vexpr: TAG_v
+   13: vexprarr: TAG_v
+   14: intarr: <lambda> INTVAL
+   15: program: <lambda> TAG_v
+   16: expr: <lambda> TAG_v
+   17: expr2: TAG_v
+   18: gexpr: TAG_g
+   19: lexpr: TAG_l
