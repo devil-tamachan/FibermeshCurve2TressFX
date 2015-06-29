@@ -5,6 +5,7 @@ ZBrushのFibermeshから"Export Curve"した.objをAMD TressFXの.tfxへ変換�
 ![](http://i.imgur.com/O4lRaGD.jpg)
 
 ・髪の太さをもっと太くしたい場合、TressFX11/main.cppの1131行付近@OnGUIEventのpHairParams->radiusに代入すると変えられる。
+
 ・.tfxのnumFollowHairsPerGuideHairで密度を変えられる。例えば2にすれば本数が２倍、4にすれば本数が４倍になる
 
 1. ZBrushのFibermeshで髪束を作る。４千ポリくらいだと上位GPUでギリギリ動くくらい？
